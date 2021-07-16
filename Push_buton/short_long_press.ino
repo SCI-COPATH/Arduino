@@ -5,6 +5,7 @@ int prev =0;
 #define push 12
 int demp =0;
 int state;
+int pre =0;
 void setup()
 {
   pinMode(push, INPUT);
@@ -13,7 +14,9 @@ void setup()
 }
 
 void loop()
-{state=0;
+{
+  //state=0;
+  demp=0;
    state = digitalRead(push);
    demp=demp+state;// the count the delay causwesd
   
@@ -33,35 +36,39 @@ void loop()
       delay(fac); 
       prev= 0;
     }
-    demp=0;
+    //demp=0;
+    state = digitalRead(push);
+   demp=demp+state;
     
   }
- 
+  
  //problem exit when long press continoous blinking of red occurs
  
- if(demp>1)
-    { prev=0;
+ //if(demp>1)
+ //   { prev=0;
      
-    }
+  //  }
   
-  else if(demp>1)   // for long press
+   if(state==1 && demp>1)   // for long press
   {
-    if(prev==0)
+    //digitalWrite(red, LOW);
+    if(pre==0)
     {
   digitalWrite(blue, HIGH);
   delay(fac); 
-  prev= 1;
+  pre= 1;
     }
     
-    else if(prev==1)
+    else if(pre==1)
     {
       digitalWrite(blue, LOW);
       delay(fac); 
-      prev= 0;
+      pre= 0;
     }
     
   }
-  
-  
+  //state = digitalRead(push);
+   //demp=demp+state;
+  //state = digitalRead(push);
   
 }
